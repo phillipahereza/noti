@@ -27,6 +27,10 @@ var baseDefaults = map[string]interface{}{
 
 	"nsuser.soundName":     "Ping",
 	"nsuser.soundNameFail": "Basso",
+	"nuser.titlePrefix":    "",
+	"nuser.titleSuffix":    "",
+	"nuser.messagePrefix":  "",
+	"nuser.messageSuffix":  "",
 
 	"say.voice": "Alex",
 
@@ -69,6 +73,10 @@ func setNotiDefaults(v *viper.Viper) {
 var keyEnvBindings = map[string]string{
 	"nsuser.soundName":     "NOTI_NSUSER_SOUNDNAME",
 	"nsuser.soundNameFail": "NOTI_NSUSER_SOUNDNAMEFAIL",
+	"nuser.titlePrefix":    "NOTI_NSUSER_TITLEPREFIX",
+	"nuser.titleSuffix":    "NOTI_NSUSER_TITLESUFFIX",
+	"nuser.messagePrefix":  "NOTI_NSUSER_MESSAGEPREFIX",
+	"nuser.messageSuffix":  "NOTI_NSUSER_MESSAGESUFFIX",
 
 	"say.voice": "NOTI_SAY_VOICE",
 

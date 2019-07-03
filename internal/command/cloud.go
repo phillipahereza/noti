@@ -101,3 +101,12 @@ func getMattermost(title, message string, v *viper.Viper) notification {
 		Client: httpClient,
 	}
 }
+
+func getTitleMessagePrefixSuffix(v *viper.Viper) (titlePrefix, titleSuffix, messagePrefix, messageSuffix string) {
+	titlePrefix = v.GetString("nsuser.titlePrefix")
+	titleSuffix = v.GetString("nsuer.titleSuffix")
+	messagePrefix = v.GetString("nsuer.messagePrefix")
+	messageSuffix = v.GetString("nsuer.messageSuffix")
+
+	return
+}
