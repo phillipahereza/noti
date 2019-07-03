@@ -9,6 +9,7 @@ import (
 )
 
 func getBanner(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &nsuser.Notification{
 		Title:           title,
 		InformativeText: message,

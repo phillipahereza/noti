@@ -19,6 +19,7 @@ import (
 var httpClient = &http.Client{Timeout: 30 * time.Second}
 
 func getBearyChat(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &bearychat.Notification{
 		Text:            fmt.Sprintf("**%s**\n%s", title, message),
 		IncomingHookURI: v.GetString("bearychat.incomingHookURI"),
@@ -27,6 +28,7 @@ func getBearyChat(title, message string, v *viper.Viper) notification {
 }
 
 func getHipChat(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &hipchat.Notification{
 		AccessToken:   v.GetString("hipchat.accessToken"),
 		Room:          v.GetString("hipchat.room"),
@@ -37,6 +39,7 @@ func getHipChat(title, message string, v *viper.Viper) notification {
 }
 
 func getPushbullet(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &pushbullet.Notification{
 		Title:       title,
 		Body:        message,
@@ -48,6 +51,7 @@ func getPushbullet(title, message string, v *viper.Viper) notification {
 }
 
 func getPushover(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &pushover.Notification{
 		Title:    title,
 		Message:  message,
@@ -58,6 +62,7 @@ func getPushover(title, message string, v *viper.Viper) notification {
 }
 
 func getPushsafer(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &pushsafer.Notification{
 		Title:   title,
 		Message: message,
@@ -67,6 +72,7 @@ func getPushsafer(title, message string, v *viper.Viper) notification {
 }
 
 func getSimplepush(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &simplepush.Notification{
 		Title:   title,
 		Message: message,
@@ -77,6 +83,7 @@ func getSimplepush(title, message string, v *viper.Viper) notification {
 }
 
 func getSlack(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &slack.Notification{
 		Token:     v.GetString("slack.token"),
 		Channel:   v.GetString("slack.channel"),
@@ -90,6 +97,7 @@ func getSlack(title, message string, v *viper.Viper) notification {
 }
 
 func getMattermost(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &mattermost.Notification{
 		IncomingHookURI: v.GetString("mattermost.incomingHookURI"),
 		Channel:         v.GetString("mattermost.channel"),
@@ -102,11 +110,4 @@ func getMattermost(title, message string, v *viper.Viper) notification {
 	}
 }
 
-func getTitleMessagePrefixSuffix(v *viper.Viper) (titlePrefix, titleSuffix, messagePrefix, messageSuffix string) {
-	titlePrefix = v.GetString("nsuser.titlePrefix")
-	titleSuffix = v.GetString("nsuer.titleSuffix")
-	messagePrefix = v.GetString("nsuer.messagePrefix")
-	messageSuffix = v.GetString("nsuer.messageSuffix")
 
-	return
-}

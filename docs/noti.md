@@ -239,6 +239,21 @@ channel
 
 username
     Noti bot username.
+    
+CUSTOM
+
+titlePrefix
+    A custom string to prefix the notification title
+    
+titleSuffix
+    A custom string to be added at the end of the notification title
+    
+messagePrefix
+    A custom string to prefix the notification message
+    
+messageSuffix
+    A custom string to be added at the end of the notification message
+    
 ```
 
 ## Examples
@@ -295,6 +310,11 @@ slack:
   token: 1234567890abcdefg
   channel: '@jaime'
   username: noti
+custom:
+  titlePrefix: laptop
+  titleSuffix: macbook
+  messageSuffix: hot
+  messagePrefix: superhot
 ```
 
 ## Setting up cloud accounts

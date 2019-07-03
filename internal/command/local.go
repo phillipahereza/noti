@@ -12,6 +12,7 @@ import (
 )
 
 func getBanner(title, message string, v *viper.Viper) notification {
+	title, message = prefixSuffixTitleMessage(title, message, v)
 	return &freedesktop.Notification{
 		Summary:       title,
 		Body:          message,

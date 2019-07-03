@@ -27,10 +27,6 @@ var baseDefaults = map[string]interface{}{
 
 	"nsuser.soundName":     "Ping",
 	"nsuser.soundNameFail": "Basso",
-	"nuser.titlePrefix":    "",
-	"nuser.titleSuffix":    "",
-	"nuser.messagePrefix":  "",
-	"nuser.messageSuffix":  "",
 
 	"say.voice": "Alex",
 
@@ -62,6 +58,11 @@ var baseDefaults = map[string]interface{}{
 	"mattermost.channel":         "",
 	"mattermost.incomingHookURI": "",
 	"mattermost.iconurl":         "",
+
+	"custom.titlePrefix":    "",
+	"custom.titleSuffix":    "",
+	"custom.messagePrefix":  "",
+	"custom.messageSuffix":  "",
 }
 
 func setNotiDefaults(v *viper.Viper) {
@@ -73,10 +74,6 @@ func setNotiDefaults(v *viper.Viper) {
 var keyEnvBindings = map[string]string{
 	"nsuser.soundName":     "NOTI_NSUSER_SOUNDNAME",
 	"nsuser.soundNameFail": "NOTI_NSUSER_SOUNDNAMEFAIL",
-	"nuser.titlePrefix":    "NOTI_NSUSER_TITLEPREFIX",
-	"nuser.titleSuffix":    "NOTI_NSUSER_TITLESUFFIX",
-	"nuser.messagePrefix":  "NOTI_NSUSER_MESSAGEPREFIX",
-	"nuser.messageSuffix":  "NOTI_NSUSER_MESSAGESUFFIX",
 
 	"say.voice": "NOTI_SAY_VOICE",
 
@@ -110,6 +107,11 @@ var keyEnvBindings = map[string]string{
 	"mattermost.channel":         "NOTI_MATTERMOST_CHANNEL",
 	"mattermost.iconurl":         "NOTI_MATTERMOST_ICONURL",
 	"mattermost.type":            "NOTI_MATTERMOST_TYPE",
+
+	"custom.titlePrefix":    "NOTI_CUSTOM_TITLEPREFIX",
+	"custom.titleSuffix":    "NOTI_CUSTOM_TITLESUFFIX",
+	"custom.messagePrefix":  "NOTI_CUSTOM_MESSAGEPREFIX",
+	"custim.messageSuffix":  "NOTI_CUSTOM_MESSAGESUFFIX",
 }
 
 var keyEnvBindingsDeprecated = map[string]string{
@@ -373,4 +375,31 @@ func getNotifications(v *viper.Viper, services map[string]struct{}) []notificati
 	}
 
 	return notis
+}
+
+
+func prefixSuffixTitleMessage(title, message string, v *viper.Viper) (string, string) {
+
+	titlePrefix := v.GetString("custom.titlePrefix")
+	titleSuffix := v.GetString("custom.titleSuffix")
+	messagePrefix := v.GetString("custom.messagePrefix")
+	messageSuffix := v.GetString("custom.messageSuffix")
+
+	if titlePrefix != "" {
+		title = fmt.Sprintf("[%s] %s", titlePrefix, title)
+	}
+
+	if titleSuffix != "" {
+		title = fmt.Sprintf("%s (%s)", title, titleSuffix)
+	}
+
+	if messagePrefix != "" {
+		message = fmt.Sprintf("[%s] %s", messagePrefix, message)
+	}
+
+	if messageSuffix != "" {
+		message = fmt.Sprintf("%s (%s)", message, messageSuffix)
+	}
+
+	return title, message
 }
